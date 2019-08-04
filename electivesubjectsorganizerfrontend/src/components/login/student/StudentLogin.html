@@ -1,0 +1,60 @@
+<div class="student-login" xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+    <h1>Student Login</h1>
+    <form>
+        <span>Album number:</span>
+        <p><input v-model="albumNumber" placeholder="album number" required></p>
+
+        <p><span>Name:</span></p>
+        <p><input v-model="Name" placeholder="name" required></p>
+
+        <p><span>Surname:</span></p>
+        <p><input v-model="Surname" placeholder="surname" required></p>
+
+        <p><span>Field of study:</span></p>
+        <p><input v-model="fieldOfStudy" placeholder="field of study" required></p>
+
+        <p><span>Studies degree:</span></p>
+        <p><input v-model="studiesDegree" placeholder="studies degree" required></p>
+
+        <p><span>Speciality:</span></p>
+        <p><input v-model="Speciality" placeholder="speciality"></p>
+
+        <p><span>Number of semester:</span></p>
+        <p><select v-model="numberOfSemester"> placeholder="number of semester"
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            required
+        </select>
+        </p>
+
+        <p><span>Average grade:</span></p>
+        <p><input v-model="averageGrade" type="number" step="0.01" min="2.00" max="5.00" required></p>
+
+        <p>
+            <button v-on:click="logIn"><router-link to="/data" >Log in</router-link></button>
+        </p>
+
+        <div v-if="login">
+            <!--<StudentPersonal-->
+                    <!--sentAlbumNumber="albumNumber"-->
+                    <!--sentName="Name"-->
+                    <!--sentSurname="Surname"-->
+                    <!--sentFieldOfStudy="FieldOfStudy"-->
+                    <!--sentStudiesDegree="StudiesDegree"-->
+                    <!--sentSpeciality="Speciality"-->
+                    <!--sentNumberOfSemester="NumberOfSemester"-->
+                    <!--sentAverageGrade="AverageGrade">-->
+
+            <!--</StudentPersonal>-->
+        </div>
+
+    </form>
+</div>
+
+

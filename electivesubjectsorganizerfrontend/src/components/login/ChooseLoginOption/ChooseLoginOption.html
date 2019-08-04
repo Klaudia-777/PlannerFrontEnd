@@ -1,0 +1,28 @@
+<div class="choose-login-option" xmlns:v-on="http://www.w3.org/1999/xhtml">
+    <StudentLogin></StudentLogin>
+
+    <h1>Welcome on Elective Subjects Organizer site!</h1>
+
+    <p>
+
+        <button v-on:click="studentLogin" style="width: 100px; height: 50px;margin:5px; background: azure; color: darkblue" >Student</button>
+        <button v-on:click="adminLogin" style="width: 100px; height: 50px; margin:5px; background: azure; color: darkblue" >Admin</button>
+        <router-view></router-view>
+
+    </p>
+    <div v-if="student">
+    </div>
+    <div v-if="admin">
+        <AdminLogin></AdminLogin>
+    </div>
+    <!--<div v-if="student===true" id="StudentLogin.html">-->
+        <!--&lt;!&ndash;<span class="student-login">Upload a file</span>&ndash;&gt;-->
+    <!--</div>-->
+    <!--<span v-if="ChooseLoginOption.data.student">-->
+    <!--<iframe src="StudentLogin.html"></iframe>-->
+
+    <!--</span>-->
+    <!--<span v-if="admin">-->
+    <!--</span>-->
+
+</div>

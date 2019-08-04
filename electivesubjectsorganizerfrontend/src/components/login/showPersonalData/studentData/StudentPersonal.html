@@ -1,0 +1,36 @@
+<div class="student-personal" xmlns:v-on="http://www.w3.org/1999/xhtml">
+    <h1>Are those data correct?</h1>
+
+    <p><span>Album number:</span></p>
+    <p>{{ sentAlbumNumber }}</p>
+
+    <p><span>Name:</span></p>
+    <p>{{ sentName }}</p>
+
+    <p><span>Surname:</span></p>
+    <p>{{ sentSurname }}</p>
+
+    <p><span>Field of study:</span></p>
+    <p>{{ sentFieldOfStudy }}</p>
+
+    <p><span>Studies degree:</span></p>
+    <p>{{ sentStudiesDegree }}</p>
+
+    <p><span>Speciality:</span></p>
+    <p>{{ sentSpeciality }}</p>
+
+    <p><span>Number of semester:</span></p>
+    <p>{{ sentNumberOfSemester }}</p>
+
+    <p><span>Average grade:</span></p>
+    <p>{{ sentAverageGrade }}</p>
+
+    <p>
+        <button v-on:click="confirm">Confirm</button>
+    </p>
+    <div v-if="confirm">
+        <p>CONFIRMED</p>>
+    </div>
+</div>
+
+

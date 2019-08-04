@@ -1,0 +1,17 @@
+<div class="admin-login" xmlns:v-on="http://www.w3.org/1999/xhtml">
+    <h1>Admin Login</h1>
+    <form method="sendForm">
+        <span>Login:</span>
+        <p><input v-model="login" placeholder="login" required></p>
+
+        <p><span>Password:</span></p>
+        <p><input v-model="password" placeholder="password" required></p>
+
+        <p>
+            <button v-on:click="sendForm">Log In</button>
+        </p>
+
+    </form>
+</div>
+
+

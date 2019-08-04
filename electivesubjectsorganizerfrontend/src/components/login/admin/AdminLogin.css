@@ -1,0 +1,8 @@
+.admin-login {
+    padding: 0;
+    position: absolute;
+    top: 200%;
+    left: 50%;
+    margin: 0 -50% -50% 0;
+    transform: translate(-50%, -50%)
+}
