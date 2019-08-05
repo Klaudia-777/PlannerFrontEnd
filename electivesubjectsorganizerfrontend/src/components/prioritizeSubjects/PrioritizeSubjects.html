@@ -1,0 +1,20 @@
+<div class="prioritize-subjects" xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+    <h1>Prioritize Subjects Menu</h1>
+    <span>Elective Subjects:</span>
+
+
+    <ul>
+        <li v-for="item in items">
+        <p>{{item.name}}</p>
+        <p><input v-model=item.priority placeholder="priority" required></p>
+        </li>
+    </ul>
+
+    <p>
+        <button v-on:click="save">Save</button>
+    </p>
+
+</div>
+
+

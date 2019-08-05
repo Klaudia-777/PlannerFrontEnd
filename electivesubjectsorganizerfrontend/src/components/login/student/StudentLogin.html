@@ -37,22 +37,8 @@
         <p><input v-model="averageGrade" type="number" step="0.01" min="2.00" max="5.00" required></p>
 
         <p>
-            <button v-on:click="logIn"><router-link to="/data" >Log in</router-link></button>
+            <button type="submit" v-on:click="logIn">Log In</button>
         </p>
-
-        <div v-if="login">
-            <!--<StudentPersonal-->
-                    <!--sentAlbumNumber="albumNumber"-->
-                    <!--sentName="Name"-->
-                    <!--sentSurname="Surname"-->
-                    <!--sentFieldOfStudy="FieldOfStudy"-->
-                    <!--sentStudiesDegree="StudiesDegree"-->
-                    <!--sentSpeciality="Speciality"-->
-                    <!--sentNumberOfSemester="NumberOfSemester"-->
-                    <!--sentAverageGrade="AverageGrade">-->
-
-            <!--</StudentPersonal>-->
-        </div>
 
     </form>
 </div>
