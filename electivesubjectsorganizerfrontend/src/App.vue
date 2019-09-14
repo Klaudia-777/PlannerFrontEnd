@@ -2,10 +2,10 @@
     <div id="app">
         <!--<AdminLogin></AdminLogin>-->
         <!--<StudentLogin></StudentLogin>-->
-        <ChooseLoginOption v-if="!isLogged"></ChooseLoginOption>
-        <StudentPersonal v-if="isLogged && !isConfirmed && !isSaved" v-bind:user-data="userData"></StudentPersonal>
+        <ChooseLoginOption v-if="!isLogged && !isAdminLogged"></ChooseLoginOption>
+        <StudentPersonal v-if="isLogged && !isConfirmed && !isAdminLogged" v-bind:user-data="userData"></StudentPersonal>
         <PrioritizeSubjects v-if="isConfirmed && !isSaved"></PrioritizeSubjects>
-        <Saved v-if="isSaved"></Saved>
+        <Saved v-if="isAdminLogged"></Saved>
     </div>
 </template>
 
@@ -19,6 +19,7 @@
     import StudentPersonal from "./components/login/showPersonalData/studentData/StudentPersonal";
     import PrioritizeSubjects from "./components/prioritizeSubjects/PrioritizeSubjects";
     import Saved from "./components/saved/Saved";
+    import AdminLogin from "./components/login/admin/AdminLogin";
 
     export default {
         name: 'app',
@@ -27,7 +28,8 @@
                 isLogged: false,
                 isConfirmed: false,
                 userData: null,
-                isSaved: false
+                isSaved: false,
+                isAdminLogged: false
             }
         },
         components: {
@@ -43,8 +45,12 @@
                 this.userData = data;
                 this.isLogged = true;
             });
-            EventBus.$on('LOGIN_CONFIRMED', () => {
-                this.isConfirmed = true;
+            EventBus.$on('LOGIN_CONFIRMED', (isConfirmed) => {
+                this.isConfirmed = isConfirmed;
+            });
+            EventBus.$on('ADMIN_LOGGED', (isLogged) => {
+                console.log("AAPPPPPPPP"+isLogged);
+                this.isAdminLogged = isLogged;
             });
             EventBus.$on('CHOICE_SAVED', () => {
                 this.isSaved = true;

@@ -3,6 +3,7 @@
 <script>
 
     import EventBus from '../../../../eventBus'
+    import axios from 'axios';
 
     export default {
         props: {
@@ -12,42 +13,45 @@
         data() {
             return {
 
-                sentAlbumNumber: '',
-                sentName: '',
-                sentSurname: '',
-                sentFieldOfStudy: '',
-                sentStudiesDegree: '',
-                sentSpeciality: '',
-                sentNumberOfSemester: '',
-                sentAverageGrade: '',
-                confirmation: false,
-                printAllData: false,
-                info: null
-
+                studentData: {
+                    albumNumber: '',
+                    name: '',
+                    surname: '',
+                    fieldOfStudy: '',
+                    studiesDegree: '',
+                    speciality: '',
+                    numberOfSemester: '',
+                    averageGrade: ''
+                },
+                anotherData: {
+                    confirmation: false,
+                    info: null
+                }
             }
         },
 
         methods: {
-            print: function () {
-                this.printAllData = true;
-            },
-
             confirm: function () {
-                this.confirmation = true;
-                EventBus.$emit('LOGIN_CONFIRMED');
+                axios.post(`http://localhost:8081/api/students/login`, this.studentData).then(response => {
+                    console.log(response);
+                    this.anotherData.confirmation = response;
+                    EventBus.$emit('LOGIN_CONFIRMED',response);
+                }).catch(err => {
+                    console.log(err.response);
+                });
             },
 
             updateData: function (data) {
 
                 console.log(data);
-                this.sentAlbumNumber = data.albumNumber,
-                    this.sentName = data.Name,
-                    this.sentSurname = data.Surname,
-                    this.sentFieldOfStudy = data.fieldOfStudy,
-                    this.sentStudiesDegree = data.studiesDegree,
-                    this.sentSpeciality = data.Speciality,
-                    this.sentNumberOfSemester = data.numberOfSemester,
-                    this.sentAverageGrade = data.averageGrade
+                this.studentData.albumNumber = data.albumNumber,
+                    this.studentData.name = data.Name,
+                    this.studentData.surname = data.Surname,
+                    this.studentData.fieldOfStudy = data.fieldOfStudy,
+                    this.studentData.studiesDegree = data.studiesDegree,
+                    this.studentData.speciality = data.Speciality,
+                    this.studentData.numberOfSemester = data.numberOfSemester,
+                    this.studentData.averageGrade = data.averageGrade
             }
         },
         mounted() {

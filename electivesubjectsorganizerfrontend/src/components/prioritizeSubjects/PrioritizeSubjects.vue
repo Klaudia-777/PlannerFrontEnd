@@ -16,13 +16,13 @@
                 items: [
                     {
                         name: 'Math',
-                        priority: 0
+                        priority: ''
                     }, {
                         name: 'Physics',
-                        priority: 0
+                        priority: ''
                     }, {
                         name: 'English',
-                        priority: 0
+                        priority: ''
                     }
                 ],
                 isSaved: false

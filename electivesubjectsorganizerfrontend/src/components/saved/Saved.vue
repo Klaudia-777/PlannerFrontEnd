@@ -3,12 +3,14 @@
 <script>
 
     import PrioritizeSubjects from "../prioritizeSubjects/PrioritizeSubjects";
+    import AdminLogin from "../login/admin/AdminLogin";
 
     export default {
 
         name: 'Saved',
         components: {
-            PrioritizeSubjects
+            PrioritizeSubjects,
+            AdminLogin
         },
         data() {
         },

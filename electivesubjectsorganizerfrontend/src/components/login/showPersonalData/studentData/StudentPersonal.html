@@ -2,33 +2,33 @@
     <h1>Are those data correct?</h1>
 
     <p><span>Album number:</span></p>
-    <p>{{ sentAlbumNumber }}</p>
+    <p>{{ studentData.albumNumber }}</p>
 
     <p><span>Name:</span></p>
-    <p>{{ sentName }}</p>
+    <p>{{ studentData.name }}</p>
 
     <p><span>Surname:</span></p>
-    <p>{{ sentSurname }}</p>
+    <p>{{ studentData.surname }}</p>
 
     <p><span>Field of study:</span></p>
-    <p>{{ sentFieldOfStudy }}</p>
+    <p>{{ studentData.fieldOfStudy }}</p>
 
     <p><span>Studies degree:</span></p>
-    <p>{{ sentStudiesDegree }}</p>
+    <p>{{ studentData.studiesDegree }}</p>
 
     <p><span>Speciality:</span></p>
-    <p>{{ sentSpeciality }}</p>
+    <p>{{ studentData.speciality }}</p>
 
     <p><span>Number of semester:</span></p>
-    <p>{{ sentNumberOfSemester }}</p>
+    <p>{{ studentData.numberOfSemester }}</p>
 
     <p><span>Average grade:</span></p>
-    <p>{{ sentAverageGrade }}</p>
+    <p>{{ studentData.averageGrade }}</p>
 
     <p>
         <button v-on:click="confirm">Confirm</button>
     </p>
-    <div v-if="confirmation">
+    <div v-if="anotherData.confirmation">
         <p>CONFIRMED</p>
     </div>
 </div>
