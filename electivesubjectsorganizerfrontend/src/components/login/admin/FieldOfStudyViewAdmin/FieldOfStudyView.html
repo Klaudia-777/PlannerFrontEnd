@@ -1,0 +1,25 @@
+<div class="field-of-study-view" xmlns:v-on="http://www.w3.org/1999/xhtml">
+    <h1>Admin</h1>
+    <p>
+    <div class="container">
+        <div class="large-12 medium-12 small-12 cell">
+            <label>Wgraj plik z danymi studentów:
+                <input type="file" id="fileStudents" ref="file" v-on:change="handleFileUpload()"/>
+            </label>
+            <button v-on:click="submitFile()">Potwierdź</button>
+        </div>
+    </div>
+    </p> <p>
+    <div class="container">
+        <div class="large-12 medium-12 small-12 cell">
+            <label>Wgraj plik z przedmiotami:
+                <input type="file" id="fileSubjects" ref="file" v-on:change="handleFileUpload()"/>
+            </label>
+            <button v-on:click="submitFile()">Potwierdź</button>
+        </div>
+    </div>
+    </p>
+
+</div>
+
+

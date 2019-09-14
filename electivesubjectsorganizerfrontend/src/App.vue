@@ -3,9 +3,10 @@
         <!--<AdminLogin></AdminLogin>-->
         <!--<StudentLogin></StudentLogin>-->
         <ChooseLoginOption v-if="!isLogged && !isAdminLogged"></ChooseLoginOption>
-        <StudentPersonal v-if="isLogged && !isConfirmed && !isAdminLogged" v-bind:user-data="userData"></StudentPersonal>
+        <StudentPersonal v-if="isLogged && !isConfirmed && !isAdminLogged"
+                         v-bind:user-data="userData"></StudentPersonal>
         <PrioritizeSubjects v-if="isConfirmed && !isSaved"></PrioritizeSubjects>
-        <Saved v-if="isAdminLogged"></Saved>
+        <MainView v-if="isAdminLogged"></MainView>
     </div>
 </template>
 
@@ -18,8 +19,7 @@
     import EventBus from './eventBus';
     import StudentPersonal from "./components/login/showPersonalData/studentData/StudentPersonal";
     import PrioritizeSubjects from "./components/prioritizeSubjects/PrioritizeSubjects";
-    import Saved from "./components/saved/Saved";
-    import AdminLogin from "./components/login/admin/AdminLogin";
+    import MainView from "./components/login/admin/mainView/MainView";
 
     export default {
         name: 'app',
@@ -29,7 +29,8 @@
                 isConfirmed: false,
                 userData: null,
                 isSaved: false,
-                isAdminLogged: false
+                isAdminLogged: false,
+                uploadStudents: false
             }
         },
         components: {
@@ -38,7 +39,7 @@
             // AdminLogin,
             ChooseLoginOption,
             PrioritizeSubjects,
-            Saved
+            MainView
         },
         mounted() {
             EventBus.$on('STUDENT_LOGGED', (data) => {
@@ -49,12 +50,15 @@
                 this.isConfirmed = isConfirmed;
             });
             EventBus.$on('ADMIN_LOGGED', (isLogged) => {
-                console.log("AAPPPPPPPP"+isLogged);
+                console.log("AAPPPPPPPP" + isLogged);
                 this.isAdminLogged = isLogged;
             });
             EventBus.$on('CHOICE_SAVED', () => {
                 this.isSaved = true;
-            })
+            });
+            EventBus.$on('STUDENTS_UPLOADED', (isUploaded) => {
+                this.uploadStudents = isUploaded;
+            });
         }
     }
 

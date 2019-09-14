@@ -1,4 +1,4 @@
-<template src="./AdminLogin.html"/>
+<template src="./AdminLogin.html"></template>
 <style src="./AdminLogin.css"></style>
 <script>
     import EventBus from '../../../eventBus'
