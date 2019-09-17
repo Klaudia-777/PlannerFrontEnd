@@ -1,13 +1,9 @@
 <div class="main-view" xmlns:v-on="http://www.w3.org/1999/xhtml">
     <h1>Uruchom zapisy na dany kierunek:</h1>
 
-    <ul>
-        <li v-for="fieldOfStudy in getAllFieldsOfStudy.call()">
-            <p>{{fieldOfStudy.toString()}}</p>
-        </li>
-    </ul>
-
-
+        <i v-for="item in fieldsOfStudy">
+           <button style="width: 110px; height: 50px;margin:5px; background: azure; color: darkblue" v-on:click="goTo(item)">{{item.toString()}}</button>
+        </i>
 
 </div>
 

@@ -7,6 +7,7 @@
                          v-bind:user-data="userData"></StudentPersonal>
         <PrioritizeSubjects v-if="isConfirmed && !isSaved"></PrioritizeSubjects>
         <MainView v-if="isAdminLogged"></MainView>
+        <FieldOfStudyView v-if="fieldOfStudyChosen"></FieldOfStudyView>
     </div>
 </template>
 
@@ -20,6 +21,7 @@
     import StudentPersonal from "./components/login/showPersonalData/studentData/StudentPersonal";
     import PrioritizeSubjects from "./components/prioritizeSubjects/PrioritizeSubjects";
     import MainView from "./components/login/admin/mainView/MainView";
+    import FieldOfStudyView from "./components/login/admin/FieldOfStudyViewAdmin/FieldOfStudyView";
 
     export default {
         name: 'app',
@@ -30,7 +32,8 @@
                 userData: null,
                 isSaved: false,
                 isAdminLogged: false,
-                uploadStudents: false
+                uploadStudents: false,
+                fieldOfStudyChosen: false
             }
         },
         components: {
@@ -39,7 +42,8 @@
             // AdminLogin,
             ChooseLoginOption,
             PrioritizeSubjects,
-            MainView
+            MainView,
+            FieldOfStudyView
         },
         mounted() {
             EventBus.$on('STUDENT_LOGGED', (data) => {
@@ -58,6 +62,9 @@
             });
             EventBus.$on('STUDENTS_UPLOADED', (isUploaded) => {
                 this.uploadStudents = isUploaded;
+            });
+            EventBus.$on('FIELD_OF_STUDY_CHOSEN', (isFOSChosen) => {
+                this.fieldOfStudyChosen = isFOSChosen;
             });
         }
     }

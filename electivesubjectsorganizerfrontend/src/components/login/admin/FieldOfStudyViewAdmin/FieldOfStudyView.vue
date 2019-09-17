@@ -45,6 +45,7 @@
                         console.log(err.response);
                     });
             }
+
             // uploadSubjects: function () {
             // },
 
@@ -58,6 +59,12 @@
             //         console.log(err.response);
             //     });
             // },
+        },
+        mounted() {
+            getFieldOfStudyName: {
+
+            }
+
         }
     };
 </script>

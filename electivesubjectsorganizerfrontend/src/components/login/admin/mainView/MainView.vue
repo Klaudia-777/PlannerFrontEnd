@@ -4,32 +4,36 @@
     import EventBus from '../../../../eventBus'
     import axios from 'axios';
     import AdminLogin from "../AdminLogin";
+    import FieldOfStudyView from "../FieldOfStudyViewAdmin/FieldOfStudyView";
 
     export default {
 
         name: 'MainView',
         components: {
-            AdminLogin
+            AdminLogin,
+            FieldOfStudyView
         },
         data() {
             return {
-                MainView: {
-                    fieldsOfStudy: [],
-                }
+                fieldsOfStudy: []
             }
         },
-        methods: {
-            getAllFieldsOfStudy() {
-                axios.get('/http://localhost:8081/api/fieldsOfStudy').then(response => {
+        mounted() {
+                axios.get('http://localhost:8081/api/fieldsOfStudy').then(response => {
+                    this.fieldsOfStudy = response.data;
                     console.log(response.data);
-                    // this.MainView.fieldOfStudy = response.data;
-                    // EventBus.$emit('FIELD_OF_STUDY_CHOSEN', response);
                 })
                     .catch(err => {
                         console.log('FAILURE!!');
-                        console.log(err.response.data);
+                        console.log(err.response);
                     });
+            },
+        methods:{
+            goTo : function(selectedButton) {
+                EventBus.$emit('FIELD_OF_STUDY_CHOSEN',selectedButton);
+                return selectedButton;
             }
+        }
             // uploadSubjects: function () {
             // },
 
@@ -43,7 +47,7 @@
             //         console.log(err.response);
             //     });
             // },
-        }
+
     };
 </script>
 
