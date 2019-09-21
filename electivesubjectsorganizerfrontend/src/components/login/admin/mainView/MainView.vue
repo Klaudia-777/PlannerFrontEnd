@@ -15,7 +15,8 @@
         },
         data() {
             return {
-                fieldsOfStudy: []
+                fieldsOfStudy: [],
+                buttonTextValue: ''
             }
         },
         mounted() {
@@ -29,9 +30,11 @@
                     });
             },
         methods:{
-            goTo : function(selectedButton) {
-                EventBus.$emit('FIELD_OF_STUDY_CHOSEN',selectedButton);
-                return selectedButton;
+            getButtonText : function(buttonText){
+                EventBus.$emit('FIELD_OF_STUDY_CHOSEN');
+                this.buttonTextValue=buttonText;
+                console.log(this.buttonTextValue);
+                return buttonText;
             }
         }
             // uploadSubjects: function () {

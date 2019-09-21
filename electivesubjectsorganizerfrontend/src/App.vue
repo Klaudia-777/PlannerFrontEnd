@@ -7,7 +7,7 @@
                          v-bind:user-data="userData"></StudentPersonal>
         <PrioritizeSubjects v-if="isConfirmed && !isSaved"></PrioritizeSubjects>
         <MainView v-if="isAdminLogged"></MainView>
-        <FieldOfStudyView v-if="fieldOfStudyChosen"></FieldOfStudyView>
+        <!--<FieldOfStudyView v-if="fieldOfStudyChosen"></FieldOfStudyView>-->
     </div>
 </template>
 
@@ -63,8 +63,8 @@
             EventBus.$on('STUDENTS_UPLOADED', (isUploaded) => {
                 this.uploadStudents = isUploaded;
             });
-            EventBus.$on('FIELD_OF_STUDY_CHOSEN', (isFOSChosen) => {
-                this.fieldOfStudyChosen = isFOSChosen;
+            EventBus.$on('FIELD_OF_STUDY_CHOSEN',() => {
+                this.fieldOfStudyChosen = true;
             });
         }
     }

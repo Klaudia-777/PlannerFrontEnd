@@ -2,9 +2,9 @@
     <h1>Uruchom zapisy na dany kierunek:</h1>
 
         <i v-for="item in fieldsOfStudy">
-           <button style="width: 110px; height: 50px;margin:5px; background: azure; color: darkblue" v-on:click="goTo(item)">{{item.toString()}}</button>
+           <button style="width: 110px; height: 50px;margin:5px; background: azure; color: darkblue" v-on:click="getButtonText(item.toString())">{{item.toString()}}</button>
         </i>
 
+            <FieldOfStudyView v-bind:fieldOfStudy = this.buttonTextValue />
+
 </div>
-
-

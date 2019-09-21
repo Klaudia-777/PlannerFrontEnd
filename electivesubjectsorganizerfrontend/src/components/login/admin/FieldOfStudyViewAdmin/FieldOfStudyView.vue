@@ -11,25 +11,28 @@
         components: {
             MainView
         },
+        props: ['fieldOfStudy'],
         data() {
             return {
-                MainView: {
+                FieldOfStudyView: {
+                    file : '',
                     fileStudents: '',
                     fileSubjects: '',
                     uploadStudents: false,
                     uploadSubjects: false,
-                    changeNoPlaces: false
+                    changeNoPlaces: false,
                 }
             }
         },
         methods: {
-            handleFileUpload() {
-                this.FieldOfStudyView.file = this.$refs.file.files[0];
+            handleFileUpload(e) {
+                this.FieldOfStudyView.file = e.target.files || e.dataTransfer.files;
+                console.log(this.FieldOfStudyView.file)
             },
             submitFile() {
                 let formData = new FormData();
-                formData.append('file', this.file);
-                axios.post('/http://localhost:8081/api/students', formData,
+                formData.append('file', this.FieldOfStudyView.file[0]);
+                axios.post('http://localhost:8081/api/students', formData,
                     {
                         headers: {
                             'Content-Type': 'multipart/form-data'
@@ -37,7 +40,7 @@
                     }
                 ).then(response => {
                     console.log('SUCCESS!!');
-                    this.MainView.uploadStudents = response;
+                    this.FieldOfStudyView.uploadStudents = response;
                     EventBus.$emit('STUDENTS_UPLOADED', response);
                 })
                     .catch(err => {
@@ -45,7 +48,6 @@
                         console.log(err.response);
                     });
             }
-
             // uploadSubjects: function () {
             // },
 
@@ -61,10 +63,6 @@
             // },
         },
         mounted() {
-            getFieldOfStudyName: {
-
-            }
-
         }
     };
 </script>
