@@ -5,18 +5,22 @@
     import axios from 'axios';
     import AdminLogin from "../AdminLogin";
     import FieldOfStudyView from "../FieldOfStudyViewAdmin/FieldOfStudyView";
+    import FileUpload from "../fileUpload/FileUpload";
 
     export default {
 
         name: 'MainView',
         components: {
             AdminLogin,
+            FileUpload,
             FieldOfStudyView
         },
         data() {
             return {
                 fieldsOfStudy: [],
-                buttonTextValue: ''
+                buttonTextValue: '',
+                students: [],
+                cleanStudents: false
             }
         },
         mounted() {
@@ -30,12 +34,33 @@
                     });
             },
         methods:{
-            getButtonText : function(buttonText){
-                EventBus.$emit('FIELD_OF_STUDY_CHOSEN');
-                this.buttonTextValue=buttonText;
-                console.log(this.buttonTextValue);
-                return buttonText;
+            // getButtonText : function(buttonText){
+            //     EventBus.$emit('FIELD_OF_STUDY_CHOSEN');
+            //     this.buttonTextValue=buttonText;
+            //     console.log(this.buttonTextValue);
+            //     return buttonText;
+            // }
+            studentList: function(buttonText) {
+                axios.get(`http://localhost:8081/api/admin/fieldOfStudyView/${buttonText}`).then(response => {
+                    if(this.cleanStudents){
+                        this.students=[];
+                        this.cleanStudents=false;
+                    }
+                    // EventBus.$emit('STUDENTS_PRINTED', response);
+                    this.buttonTextValue = buttonText;
+                    this.students = response.data;
+                    this.cleanStudents=true;
+                }).catch(err => {
+                    console.log(err.response);
+                })
+            },
+            fileUpload: function(){
+                this.buttonTextValue = 'Upload Files';
             }
+
+        },
+        computed: {
+
         }
             // uploadSubjects: function () {
             // },
