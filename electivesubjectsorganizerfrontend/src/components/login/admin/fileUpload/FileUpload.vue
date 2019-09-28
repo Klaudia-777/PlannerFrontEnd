@@ -7,7 +7,7 @@
 
     export default {
 
-        name: 'FieldOfStudyView',
+        name: 'FileUpload',
         components: {
             MainView
         },
@@ -21,12 +21,12 @@
         },
         methods: {
             handleFileUpload(e) {
-                this.FieldOfStudyView.file = e.target.files || e.dataTransfer.files;
-                console.log(this.FieldOfStudyView.file)
+                this.FileUpload.file = e.target.files || e.dataTransfer.files;
+                console.log(this.FileUpload.file)
             },
             submitFile() {
                 let formData = new FormData();
-                formData.append('file', this.FieldOfStudyView.file[0]);
+                formData.append('file', this.FileUpload.file[0]);
                 axios.post('http://localhost:8081/api/students', formData,
                     {
                         headers: {

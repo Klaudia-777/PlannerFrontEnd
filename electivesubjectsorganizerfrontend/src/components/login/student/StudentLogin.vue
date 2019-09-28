@@ -17,7 +17,7 @@
                 Surname: '',
                 fieldOfStudy: 'EiT',
                 studiesDegree: 'I',
-                Speciality: null,
+                Speciality: 'x',
 
                 numberOfSemester: '',
                 averageGrade: '',
