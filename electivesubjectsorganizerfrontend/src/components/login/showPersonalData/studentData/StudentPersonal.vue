@@ -4,6 +4,7 @@
 
     import EventBus from '../../../../eventBus'
     import axios from 'axios';
+    import {State} from "../../../../albumNumber";
 
     export default {
         props: {
@@ -45,6 +46,7 @@
 
                 console.log(data);
                 this.studentData.albumNumber = data.albumNumber,
+                    State.albumNumber=this.studentData.albumNumber;
                     this.studentData.name = data.Name,
                     this.studentData.surname = data.Surname,
                     this.studentData.fieldOfStudy = data.fieldOfStudy,

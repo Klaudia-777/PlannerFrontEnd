@@ -2,8 +2,9 @@
 <style src="./PrioritizeSubjects.css"></style>
 <script>
 
-    import EventBus from '../../eventBus'
     import StudentPersonal from "../login/showPersonalData/studentData/StudentPersonal";
+    import axios from 'axios';
+    import {State} from "../../albumNumber";
 
     export default {
 
@@ -11,33 +12,25 @@
         components: {
             StudentPersonal
         },
+        // props: [albumNumber],
         data() {
             return {
-                items: [
-                    {
-                        name: 'Math',
-                        priority: ''
-                    }, {
-                        name: 'Physics',
-                        priority: ''
-                    }, {
-                        name: 'English',
-                        priority: ''
-                    }
-                ],
-                isSaved: false
+                subjects: [],
             }
         },
-
         methods: {
-            save: function () {
-                this.isSaved = true;
-                // console.log(dataToSend);
-                EventBus.$emit('CHOICE_SAVED', this.isSaved);
+            print() {
+                axios.get(`http://localhost:8081/api/subjectPool/${State.albumNumber}`).then(response => {
+                    this.subjects = response.data;
+                    console.log(response.data);
+                })
+                    .catch(err => {
+                        console.log('FAILURE!!');
+                        console.log(err.response);
+                    });
             }
         }
-    }
-    ;
+    };
 
 
 </script>

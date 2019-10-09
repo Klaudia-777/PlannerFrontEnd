@@ -24,10 +24,28 @@
                 this.FileUpload.file = e.target.files || e.dataTransfer.files;
                 console.log(this.FileUpload.file)
             },
-            submitFile() {
+            submitStudentsFile() {
                 let formData = new FormData();
                 formData.append('file', this.FileUpload.file[0]);
                 axios.post('http://localhost:8081/api/students', formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }
+                ).then(response => {
+                    console.log('SUCCESS!!');
+                    EventBus.$emit('STUDENTS_UPLOADED', response);
+                })
+                    .catch(err => {
+                        console.log('FAILURE!!');
+                        console.log(err.response);
+                    });
+            },
+            submitSubjectsFile() {
+                let formData = new FormData();
+                formData.append('file', this.FileUpload.file[0]);
+                axios.post('http://localhost:8081/api/subjects', formData,
                     {
                         headers: {
                             'Content-Type': 'multipart/form-data'

@@ -3,17 +3,17 @@
     <h1>Prioritize Subjects Menu</h1>
     <span>Elective Subjects:</span>
 
-
+    <p>
+        <button v-on:click="print()">Show subjects</button>
+    </p>
     <ul>
-        <li v-for="item in items">
-        <p>{{item.name}}</p>
-        <p><input v-model=item.priority placeholder="priority" required></p>
+        <li v-for="item in subjects">
+        <p>{{item.toString().split(',')}}</p>
+        <!--<p><input v-model=item.priority placeholder="priority" required></p>-->
         </li>
     </ul>
 
-    <p>
-        <button v-on:click="save">Save</button>
-    </p>
+
 
 </div>
 
