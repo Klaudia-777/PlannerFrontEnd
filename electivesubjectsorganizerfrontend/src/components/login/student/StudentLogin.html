@@ -2,16 +2,16 @@
 
     <h1>Student Login</h1>
     <form>
-        <span>Album number:</span>
+        <span>Nr albumu:</span>
         <p><input v-model="albumNumber" placeholder="album number" required></p>
 
-        <p><span>Name:</span></p>
+        <p><span>Imię:</span></p>
         <p><input v-model="Name" placeholder="name" required></p>
 
-        <p><span>Surname:</span></p>
+        <p><span>Nazwisko:</span></p>
         <p><input v-model="Surname" placeholder="surname" required></p>
 
-        <p><span>Field of study:</span></p>
+        <p><span>Kierunek:</span></p>
         <p><label>
             <select v-model="fieldOfStudy">
                 <option>EiT</option>
@@ -21,7 +21,7 @@
         </p>
 
 
-        <p><span>Studies degree:</span></p>
+        <p><span>Stopień studiów:</span></p>
         <p><label>
             <select v-model="studiesDegree" required>
                 <option>pierwszego_stopnia</option>
@@ -30,10 +30,10 @@
         </label>
         </p>
 
-        <p><span>Speciality <p>(If you have no speciality, leave "x"):</p></span></p>
+        <p><span>Specialność <p>(If you have no speciality, leave "x"):</p></span></p>
         <p><input v-model="Speciality" placeholder="speciality"></p>
 
-        <p><span>Number of semester:</span></p>
+        <p><span>Numer semestru:</span></p>
         <p><select v-model="numberOfSemester" placeholder="number of semester">
             <option>1</option>
             <option>2</option>
@@ -46,7 +46,7 @@
         </select>
         </p>
 
-        <p><span>Average grade:</span></p>
+        <p><span>Srednia ocen za dwa poprzednie semestry:</span></p>
         <p><input v-model="averageGrade" type="number" step="0.01" min="2.00" max="5.00" required></p>
 
         <p>

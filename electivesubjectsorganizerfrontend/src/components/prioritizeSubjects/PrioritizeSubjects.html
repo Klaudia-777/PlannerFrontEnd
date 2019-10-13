@@ -1,18 +1,48 @@
 <div class="prioritize-subjects" xmlns:v-on="http://www.w3.org/1999/xhtml">
 
-    <h1>Prioritize Subjects Menu</h1>
-    <span>Elective Subjects:</span>
-
+    <h1>Przedmioty obieralne:</h1>
     <p>
-        <button v-on:click="print()">Show subjects</button>
+        <button v-on:click="print()">Pokaż przedmioty</button>
     </p>
-    <ul>
-        <li v-for="item in subjects">
-        <p>{{item.toString().split(',')}}</p>
-        <!--<p><input v-model=item.priority placeholder="priority" required></p>-->
-        </li>
-    </ul>
 
+    <div v-if="showSubjects">
+
+        <p>Uporządkuj przedmioty według preferencji.</p>
+        <p>1 - najbardziej pożądany przedmiot</p>
+        <p>{{noSubjects.toString()}} - najmniej pożądany przedmiot</p>
+
+        <table id="subjectTable">
+            <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Prowadzący</th>
+                <th>Liczba miejsc</th>
+                <th>Priorytet</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="row in subjects">
+                <td>{{row.name}}</td>
+                <td>{{row.tutor}}</td>
+                <td>{{row.numberOfPlaces}}</td>
+                <td>
+                    <select placeholder="priority" required>
+                        <li v-for="item in availablePriorities">
+                            <option>item</option>
+                        </li>
+                    </select>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!--<ul>-->
+        <!--<li v-for="item in subjects">-->
+        <!--<p>{{item.toString().split(',')}}</p>-->
+        <!--&lt;!&ndash;<p><input v-model=item.priority placeholder="priority" required></p>&ndash;&gt;-->
+        <!--</li>-->
+        <!--</ul>-->
+    </div>
 
 
 </div>

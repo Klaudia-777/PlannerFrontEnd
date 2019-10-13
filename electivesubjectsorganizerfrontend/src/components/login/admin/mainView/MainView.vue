@@ -1,7 +1,7 @@
 <template src="./MainView.html"></template>
 <style src="./MainView.css"></style>
 <script>
-    import EventBus from '../../../../eventBus'
+
     import axios from 'axios';
     import AdminLogin from "../AdminLogin";
     import FieldOfStudyView from "../FieldOfStudyViewAdmin/FieldOfStudyView";

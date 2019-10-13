@@ -12,15 +12,15 @@
         },
         data() {
             return {
-                albumNumber: '',
-                Name: '',
-                Surname: '',
-                fieldOfStudy: 'EiT',
-                studiesDegree: 'I',
+                albumNumber: '291715',
+                Name: 'Anna',
+                Surname: 'Ogiela',
+                fieldOfStudy: 'Teleinformatyka',
+                studiesDegree: 'pierwszego_stopnia',
                 Speciality: 'x',
 
-                numberOfSemester: '',
-                averageGrade: '',
+                numberOfSemester: '6',
+                averageGrade: '4.66',
 
                 confirmation: false,
                 info: null,
