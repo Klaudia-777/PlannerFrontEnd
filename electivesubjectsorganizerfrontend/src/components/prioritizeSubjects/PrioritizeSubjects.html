@@ -1,4 +1,4 @@
-<div class="prioritize-subjects" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<div class="prioritize-subjects" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
     <h1>Przedmioty obieralne:</h1>
     <p>
@@ -26,16 +26,18 @@
                 <td>{{row.tutor}}</td>
                 <td>{{row.numberOfPlaces}}</td>
                 <td>
-                    <select placeholder="priority" required>
-                        <li v-for="item in availablePriorities">
-                            <option>item</option>
-                        </li>
+                    <select v-model="item" @change="selected(item)" required>
+                        <option v-for="item in availablePrioritiesValues" v-bind:value="item" @>{{item}}
+                        </option>
                     </select>
+
                 </td>
             </tr>
             </tbody>
         </table>
-
+        <p>
+            <button v-on:click="checkEnteredPriorities()">Potwierdź</button>
+        </p>
         <!--<ul>-->
         <!--<li v-for="item in subjects">-->
         <!--<p>{{item.toString().split(',')}}</p>-->

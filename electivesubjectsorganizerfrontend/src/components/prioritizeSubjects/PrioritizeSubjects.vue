@@ -23,7 +23,8 @@
                         priority: 0
                     }
                 ],
-                availablePriorities: [],
+                availablePrioritiesValues: [],
+                setPriorities: [],
                 noSubjects: 0,
                 showSubjects: false
             }
@@ -31,6 +32,8 @@
         methods: {
             print() {
                 axios.get(`http://localhost:8081/api/subjectPool/${State.albumNumber}`).then(response => {
+                    this.availablePrioritiesValues = [];
+                    this.priorities = [];
                     this.subjects = response.data;
                     this.albumNr = State.albumNumber;
                     this.noSubjects = this.subjects.length;
@@ -40,10 +43,10 @@
                             this.subjects[i].numberOfPlaces = "brak limitu";
                         }
                         this.priorities.push([this.albumNr.toString(), this.subjects[i].id, 0]);
-                        this.availablePriorities.push(i+1);
+                        this.availablePrioritiesValues.push(i + 1);
                     }
                     console.log(this.priorities);
-                    console.log(this.availablePriorities);
+                    console.log(this.availablePrioritiesValues);
                     console.log(response.data);
                     this.showSubjects = true;
                 })
@@ -52,8 +55,20 @@
                         console.log(err.response);
                     });
             },
-            checkEnteredPriorities: function () {
+            selected: function (priority) {
+                this.setPriorities.push(priority);
+                let index = this.availablePrioritiesValues.indexOf(priority)
+                this.availablePrioritiesValues.splice(index, 1);
+                console.log(priority);
+                console.log(this.availablePrioritiesValues);
 
+            },
+            checkEnteredPriorities: function () {
+                this.setPriorities.sort((a, b) => a - b);
+                console.log(this.setPriorities);
+                let arePrioritiesCorrect = (JSON.stringify(this.availablePrioritiesValues) === JSON.stringify(this.setPriorities));
+                console.log(arePrioritiesCorrect);
+                return arePrioritiesCorrect;
             }
         }
     };
