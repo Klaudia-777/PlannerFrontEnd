@@ -26,8 +26,8 @@
                 <td>{{row.tutor}}</td>
                 <td>{{row.numberOfPlaces}}</td>
                 <td>
-                    <select v-model="item" @change="selected(item)" required>
-                        <option v-for="item in availablePrioritiesValues" v-bind:value="item" @>{{item}}
+                    <select v-model="item" @change="selected(item,row.id)" required>
+                        <option v-for="item in allPriorities" v-bind:value="item" @>{{item}}
                         </option>
                     </select>
 
