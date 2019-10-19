@@ -22,12 +22,24 @@
                 setPriorities: [],
                 allPriorities: [],
                 noSubjects: 0,
-                showSubjects: false,
                 buttonTextValue: '',
-                isSaved: false
+                isSaved: false,
+                hide: false,
+                areChoicesSaved: false
             }
         },
         methods: {
+            getChoicesStatus: function () {
+                axios.get(`http://localhost:8090/api//students/areChoicesSaved`).then(response => {
+                    this.areChoicesSaved = response.data;
+                    console.log(response.data);
+                    this.hide = true;
+                })
+                    .catch(err => {
+                        console.log('FAILURE!!');
+                        console.log(err.response);
+                    });
+            },
             print() {
                 axios.get(`http://localhost:8090/api/subjectPool/${State.albumNumber}`).then(response => {
                     this.allPriorities = [];
@@ -101,6 +113,7 @@
             },
             changeButtonTextValue: function () {
                 this.buttonTextValue = 'Pokaż zapisane';
+                this.hide = true;
             }
         }
     };
