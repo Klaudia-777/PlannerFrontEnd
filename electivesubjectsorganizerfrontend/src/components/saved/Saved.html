@@ -1,7 +1,23 @@
 <div class="prioritize-subjects" xmlns:v-on="http://www.w3.org/1999/xhtml">
 
-    <h1>SAVED :)</h1>
+    <h1>Wybrane przedmioty:</h1>
 
+    <table id="subjectChoicesTable">
+        <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Prowadzący</th>
+            <th>Priorytet</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="row in this.dataToShow">
+            <td>{{row.subjectName}}</td>
+            <td>{{row.tutor}}</td>
+            <td>{{row.priority}}</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 

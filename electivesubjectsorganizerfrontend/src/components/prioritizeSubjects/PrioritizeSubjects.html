@@ -36,7 +36,13 @@
             </tbody>
         </table>
         <p>
-            <button v-on:click="checkEnteredPriorities()">Potwierdź</button>
+            <button v-on:click="checkEnteredPriorities()">Zapisz</button>
+            <button v-on:click="changeButtonTextValue()">Pokaż zapisane</button>
+
+        <div v-if="this.isSaved===true && this.buttonTextValue==='Pokaż zapisane'">
+            <Saved v-bind:savedSubjects="this.subjects" v-bind:albumNum="this.subjects"/>
+        </div>
+
         </p>
         <!--<ul>-->
         <!--<li v-for="item in subjects">-->

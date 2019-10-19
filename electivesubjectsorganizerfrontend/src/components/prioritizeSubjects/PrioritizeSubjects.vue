@@ -5,34 +5,31 @@
     import StudentPersonal from "../login/showPersonalData/studentData/StudentPersonal";
     import axios from 'axios';
     import {State} from "../../albumNumber";
+    import Saved from "../saved/Saved";
 
     export default {
-
         name: 'PrioritizeSubjects',
         components: {
-            StudentPersonal
+            StudentPersonal,
+            Saved
         },
         data() {
             return {
                 subjects: [],
                 albumNr: '',
-                priorities: [
-                    {
-                        studentId: '',
-                        subjectId: '',
-                        priority: undefined
-                    }
-                ],
+                priorities: [],
                 computingArray: [],
                 setPriorities: [],
                 allPriorities: [],
                 noSubjects: 0,
-                showSubjects: false
+                showSubjects: false,
+                buttonTextValue: '',
+                isSaved: false
             }
         },
         methods: {
             print() {
-                axios.get(`http://localhost:8081/api/subjectPool/${State.albumNumber}`).then(response => {
+                axios.get(`http://localhost:8090/api/subjectPool/${State.albumNumber}`).then(response => {
                     this.allPriorities = [];
                     this.priorities = [];
                     this.subjects = response.data;
@@ -43,10 +40,17 @@
                         if (this.subjects[i].numberOfPlaces === 0) {
                             this.subjects[i].numberOfPlaces = "brak limitu";
                         }
-                        this.priorities.push([this.albumNr.toString(), this.subjects[i].id, undefined]);
+                        let priority = {
+                            choiceId: undefined,
+                            priority: undefined,
+                            subjectId: this.subjects[i].id,
+                            studentId: this.albumNr.toString(),
+                            qualified: false
+                        };
+                        this.priorities.push(priority);
                         this.allPriorities.push(i + 1);
                     }
-                    console.log(this.priorities);
+                    console.log(this.subjects);
                     console.log(this.allPriorities);
                     console.log(response.data);
                     this.showSubjects = true;
@@ -58,30 +62,45 @@
             },
 
             selected: function (prior, subjectId) {
-                let index = this.priorities.findIndex(x => (x[1] === subjectId));
-                this.priorities[index][2] = prior;
+                let index = this.priorities.findIndex(x => (x.subjectId === subjectId));
+                this.priorities[index].priority = prior;
                 // this.setPriorities.push(priority);
             },
 
             checkEnteredPriorities: function () {
                 this.setPriorities = [];
+                this.isSaved = false;
                 console.log(this.priorities);
                 // get only priorities values set in priorities objects:
                 for (let i = 0; i < this.priorities.length; i++) {
-                    this.setPriorities.push(this.priorities[i][2]);
+                    this.setPriorities.push(this.priorities[i].priority);
                 }
 
                 let arePrioritiesCorrect = ((new Set(this.setPriorities)).size === this.setPriorities.length);
                 if (this.setPriorities.includes(undefined)) {
-                    arePrioritiesCorrect=false;
+                    arePrioritiesCorrect = false;
                 }
                 console.log(arePrioritiesCorrect);
-                console.log(this.setPriorities);
-                if(arePrioritiesCorrect===false){
+                console.log(this.priorities);
+
+                if (arePrioritiesCorrect === false) {
                     alert("Priorytety nie zostały wybrane poprawnie.\nSprawdź swoje ustawienia.");
-                }else{
+                } else {
                     alert("Priorytety zostały ustawione poprawnie :)");
+
+                    axios.post(`http://localhost:8090/api/students/${this.albumNr}/saveChoices`, this.priorities).then(response => {
+                        console.log(this.priorities);
+                        console.log(response);
+                        this.isSaved = true;
+                    }).catch(err => {
+                        console.log(err.response);
+                    });
+
                 }
+
+            },
+            changeButtonTextValue: function () {
+                this.buttonTextValue = 'Pokaż zapisane';
             }
         }
     };

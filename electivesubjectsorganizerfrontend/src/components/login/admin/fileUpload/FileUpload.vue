@@ -27,7 +27,7 @@
             submitStudentsFile() {
                 let formData = new FormData();
                 formData.append('file', this.FileUpload.file[0]);
-                axios.post('http://localhost:8081/api/students', formData,
+                axios.post('http://localhost:8090/api/students', formData,
                     {
                         headers: {
                             'Content-Type': 'multipart/form-data'
@@ -45,7 +45,7 @@
             submitSubjectsFile() {
                 let formData = new FormData();
                 formData.append('file', this.FileUpload.file[0]);
-                axios.post('http://localhost:8081/api/subjects', formData,
+                axios.post('http://localhost:8090/api/subjects', formData,
                     {
                         headers: {
                             'Content-Type': 'multipart/form-data'

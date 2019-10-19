@@ -32,7 +32,7 @@
             submitFile() {
                 let formData = new FormData();
                 formData.append('file', this.FieldOfStudyView.file[0]);
-                axios.post('http://localhost:8081/api/students', formData,
+                axios.post('http://localhost:8090/api/students', formData,
                     {
                         headers: {
                             'Content-Type': 'multipart/form-data'
@@ -53,7 +53,7 @@
             // },
 
             // changeNoPlaces: function () {
-            //     axios.post(`http://localhost:8081/api/admin/login`, this.adminData).then(response => {
+            //     axios.post(`http://localhost:8090/api/admin/login`, this.adminData).then(response => {
             //         console.log("AAAAAAAA" + response);
             //         console.log(response);
             //         this.confirmation = response;
