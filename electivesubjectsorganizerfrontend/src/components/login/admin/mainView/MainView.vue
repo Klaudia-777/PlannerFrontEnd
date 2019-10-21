@@ -20,6 +20,8 @@
                 fieldsOfStudy: [],
                 buttonTextValue: '',
                 students: [],
+                noSemester:'',
+                studiesDegree:'',
                 cleanStudents: false
             }
         },
@@ -49,6 +51,8 @@
                     // EventBus.$emit('STUDENTS_PRINTED', response);
                     this.buttonTextValue = buttonText;
                     this.students = response.data;
+                    this.studiesDegree=this.students[1].studiesDegree;
+                    this.noSemester=this.students[1].numberOfSemester;
                     this.cleanStudents=true;
                 }).catch(err => {
                     console.log(err.response);

@@ -11,7 +11,7 @@
         components: {
             MainView
         },
-        props: ['fieldOfStudy','students'],
+        props: ['fieldOfStudy', 'students', 'noSem', 'stDegree'],
         data() {
             return {
                 FieldOfStudyView: {
@@ -47,7 +47,7 @@
                         console.log('FAILURE!!');
                         console.log(err.response);
                     });
-            }
+            },
 
             // uploadSubjects: function () {
             // },
@@ -62,10 +62,19 @@
             //         console.log(err.response);
             //     });
             // },
+            startAlgorithm: function () {
+                console.log(`http://localhost:8090/api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/start`);
+                axios.post(`http://localhost:8090/api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/start`).then(response => {
+                    console.log(response);
+                    this.anotherData.confirmation = response;
+                    EventBus.$emit('LOGIN_CONFIRMED', response);
+                }).catch(err => {
+                    console.log(err.response);
+                });
+            }
         },
-        updated: {
 
-        }
+        updated: {}
     };
 </script>
 

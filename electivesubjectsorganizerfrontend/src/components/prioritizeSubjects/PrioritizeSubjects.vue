@@ -30,49 +30,17 @@
         },
         methods: {
             getChoicesStatus: function () {
-                axios.get(`http://localhost:8090/api//students/areChoicesSaved`).then(response => {
+                axios.get(`http://localhost:8090/api/students/${State.albumNumber}/areChoicesSaved`).then(response => {
                     this.areChoicesSaved = response.data;
                     console.log(response.data);
-                    this.hide = true;
+                    this.buttonTextValue = 'Pokaż zapisane';
+
                 })
                     .catch(err => {
                         console.log('FAILURE!!');
                         console.log(err.response);
                     });
             },
-            print() {
-                axios.get(`http://localhost:8090/api/subjectPool/${State.albumNumber}`).then(response => {
-                    this.allPriorities = [];
-                    this.priorities = [];
-                    this.subjects = response.data;
-                    this.albumNr = State.albumNumber;
-                    this.noSubjects = this.subjects.length;
-
-                    for (let i = 0; i < this.noSubjects; i++) {
-                        if (this.subjects[i].numberOfPlaces === 0) {
-                            this.subjects[i].numberOfPlaces = "brak limitu";
-                        }
-                        let priority = {
-                            choiceId: undefined,
-                            priority: undefined,
-                            subjectId: this.subjects[i].id,
-                            studentId: this.albumNr.toString(),
-                            qualified: false
-                        };
-                        this.priorities.push(priority);
-                        this.allPriorities.push(i + 1);
-                    }
-                    console.log(this.subjects);
-                    console.log(this.allPriorities);
-                    console.log(response.data);
-                    this.showSubjects = true;
-                })
-                    .catch(err => {
-                        console.log('FAILURE!!');
-                        console.log(err.response);
-                    });
-            },
-
             selected: function (prior, subjectId) {
                 let index = this.priorities.findIndex(x => (x.subjectId === subjectId));
                 this.priorities[index].priority = prior;
@@ -115,6 +83,38 @@
                 this.buttonTextValue = 'Pokaż zapisane';
                 this.hide = true;
             }
+        },
+        mounted() {
+            axios.get(`http://localhost:8090/api/subjectPool/${State.albumNumber}`).then(response => {
+                this.allPriorities = [];
+                this.priorities = [];
+                this.subjects = response.data;
+                this.albumNr = State.albumNumber;
+                this.noSubjects = this.subjects.length;
+
+                for (let i = 0; i < this.noSubjects; i++) {
+                    if (this.subjects[i].numberOfPlaces === 0) {
+                        this.subjects[i].numberOfPlaces = "brak limitu";
+                    }
+                    let priority = {
+                        choiceId: undefined,
+                        priority: undefined,
+                        subjectId: this.subjects[i].id,
+                        studentId: this.albumNr.toString(),
+                        qualified: false
+                    };
+                    this.priorities.push(priority);
+                    this.allPriorities.push(i + 1);
+                }
+                console.log(this.subjects);
+                console.log(this.allPriorities);
+                console.log(response.data);
+                this.buttonTextValue = 'Pokaż przedmioty';
+            })
+                .catch(err => {
+                    console.log('FAILURE!!');
+                    console.log(err.response);
+                });
         }
     };
 

@@ -23,6 +23,8 @@
             axios.get(`http://localhost:8090/api/students/${State.albumNumber}/choices`).then(response => {
                 this.dataToCompute = response.data;
                 console.log(response.data);
+                console.log(this.savedSubjects);
+                console.log(this.albumNum);
                 for (let i = 0; i < this.savedSubjects.length; i++) {
                     let dataRow = {
                         subjectName: this.savedSubjects[i].name,

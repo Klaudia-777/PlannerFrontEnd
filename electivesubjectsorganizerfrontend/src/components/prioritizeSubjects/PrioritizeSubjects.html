@@ -1,46 +1,47 @@
 <div class="prioritize-subjects" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
-       <div v-if="this.hide===false">
-        <h1>Przedmioty obieralne:</h1>
+    <!--<div v-if="this.hide===false">-->
+    <h1>Przedmioty obieralne:</h1>
+    <p>
+        <!--<button v-on:click="print()">Pokaż przedmioty</button>-->
+        <button v-on:click="getChoicesStatus()">Pokaż zapisane</button>
+    </p>
+    <div v-if="buttonTextValue==='Pokaż przedmioty'">
+        <p>Uporządkuj przedmioty według preferencji.</p>
+        <p>1 - najbardziej pożądany przedmiot</p>
+        <p>{{noSubjects.toString()}} - najmniej pożądany przedmiot</p>
+
+        <table id="subjectTable">
+            <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Prowadzący</th>
+                <th>Liczba miejsc</th>
+                <th>Priorytet</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="row in subjects">
+                <td>{{row.name}}</td>
+                <td>{{row.tutor}}</td>
+                <td>{{row.numberOfPlaces}}</td>
+                <td>
+                    <select v-model="item" @change="selected(item,row.id)" required>
+                        <option v-for="item in allPriorities" v-bind:value="item" @>{{item}}
+                        </option>
+                    </select>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
         <p>
-            <button v-on:click="print()">Pokaż przedmioty</button>
+            <button v-on:click="checkEnteredPriorities()">Zapisz</button>
         </p>
+    </div>
 
-            <p>Uporządkuj przedmioty według preferencji.</p>
-            <p>1 - najbardziej pożądany przedmiot</p>
-            <p>{{noSubjects.toString()}} - najmniej pożądany przedmiot</p>
+    <Saved v-if="buttonTextValue==='Pokaż zapisane'" v-bind:savedSubjects="this.subjects"
+           v-bind:albumNum="this.subjects"></Saved>
 
-            <table id="subjectTable">
-                <thead>
-                <tr>
-                    <th>Nazwa</th>
-                    <th>Prowadzący</th>
-                    <th>Liczba miejsc</th>
-                    <th>Priorytet</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="row in subjects">
-                    <td>{{row.name}}</td>
-                    <td>{{row.tutor}}</td>
-                    <td>{{row.numberOfPlaces}}</td>
-                    <td>
-                        <select v-model="item" @change="selected(item,row.id)" required>
-                            <option v-for="item in allPriorities" v-bind:value="item" @>{{item}}
-                            </option>
-                        </select>
-
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <p>
-                <button v-on:click="checkEnteredPriorities()">Zapisz</button>
-                <button v-on:click="getChoicesStatus()">Pokaż zapisane</button>
-            </p>
-       </div>
-        <div v-if="this.areChoicesSaved===true">
-            <Saved v-bind:savedSubjects="this.subjects" v-bind:albumNum="this.subjects"></Saved>
-        </div>
 </div>
 
 
