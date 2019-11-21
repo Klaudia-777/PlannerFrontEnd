@@ -1,0 +1,27 @@
+<div class="change-limits" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:margin="http://www.w3.org/1999/xhtml"
+     xmlns:v-bind="http://www.w3.org/1999/xhtml">
+    <p>Zmień limity miejsc dla kierunku: {{fieldOfStudy}}</p>
+    <table id="subjectLimitsTable">
+        <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Prowadzący</th>
+            <!--<th>Liczba miejsc</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="row in subjectsJson">
+            <td>{{row.name}}</td>
+            <td>{{row.tutor}}</td>
+            <td>
+                <input v-model="item" :placeholder="row.numberOfPlaces" @change="changeLimit(item,row.id)" required/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p>
+        <button style="width: 100px; height: 50px;margin:5px; background: azure; color: darkblue"
+                v-on:click="saveOnDB()">Zapisz
+        </button>
+    </p>
+</div>

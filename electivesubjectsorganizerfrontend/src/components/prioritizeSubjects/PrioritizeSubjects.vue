@@ -30,11 +30,11 @@
         },
         methods: {
             getChoicesStatus: function () {
-                axios.get(`http://localhost:8090/api/students/${State.albumNumber}/areChoicesSaved`).then(response => {
+                axios.get(`http://localhost:8098/api/students/${State.albumNumber}/areChoicesSaved`).then(response => {
                     this.areChoicesSaved = response.data;
                     console.log(response.data);
                     this.buttonTextValue = 'Pokaż zapisane';
-
+                    this.hide=true;
                 })
                     .catch(err => {
                         console.log('FAILURE!!');
@@ -68,24 +68,21 @@
                 } else {
                     alert("Priorytety zostały ustawione poprawnie :)");
 
-                    axios.post(`http://localhost:8090/api/students/${this.albumNr}/saveChoices`, this.priorities).then(response => {
+                    axios.post(`http://localhost:8098/api/students/${this.albumNr}/saveChoices`, this.priorities).then(response => {
                         console.log(this.priorities);
                         console.log(response);
                         this.isSaved = true;
+                        alert("Zapisano.");
                     }).catch(err => {
                         console.log(err.response);
                     });
 
                 }
 
-            },
-            changeButtonTextValue: function () {
-                this.buttonTextValue = 'Pokaż zapisane';
-                this.hide = true;
             }
         },
         mounted() {
-            axios.get(`http://localhost:8090/api/subjectPool/${State.albumNumber}`).then(response => {
+            axios.get(`http://localhost:8098/api/subjectPool/${State.albumNumber}`).then(response => {
                 this.allPriorities = [];
                 this.priorities = [];
                 this.subjects = response.data;
@@ -93,7 +90,7 @@
                 this.noSubjects = this.subjects.length;
 
                 for (let i = 0; i < this.noSubjects; i++) {
-                    if (this.subjects[i].numberOfPlaces === 0) {
+                    if (this.subjects[i].numberOfPlaces ===0 || this.subjects[i].numberOfPlaces > 150) {
                         this.subjects[i].numberOfPlaces = "brak limitu";
                     }
                     let priority = {

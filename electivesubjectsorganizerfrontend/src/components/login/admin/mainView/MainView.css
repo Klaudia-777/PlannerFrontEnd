@@ -1,8 +1,37 @@
-.main-view{
+.main-view {
     padding: 0;
     position: absolute;
-    top: 20%;
+    top: 30%;
     left: 50%;
     margin: 0 -50% -50% 0;
     transform: translate(-50%, -50%);
+}
+
+div#wrapper {
+    width: 500px;
+    border: 1px solid black;
+    overflow: hidden; /* add this to contain floated children */
+}
+
+div#EiT {
+    width: 175px;
+    float: left; /* add this */
+    /*border: 1px solid darkblue;*/
+}
+
+div#Teleinformatyka {
+    width: 175px;
+    /*border: 1px solid darkblue;*/
+    float: left; /* add this */
+}
+
+div#Cyberbezpieczeństwo {
+    width: 175px;
+    /*border: 1px solid darkblue;*/
+    float: left; /* add this */
+}
+
+div#fieldOfStudyView {
+    clear: both;
+    /*float: bottom;*/
 }

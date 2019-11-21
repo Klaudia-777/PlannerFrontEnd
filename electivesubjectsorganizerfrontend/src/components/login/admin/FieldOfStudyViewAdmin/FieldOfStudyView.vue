@@ -4,23 +4,28 @@
     import EventBus from '../../../../eventBus'
     import axios from 'axios';
     import MainView from "../mainView/MainView";
+    import ChangeLimits from "../changeLimits/ChangeLimits";
 
     export default {
 
         name: 'FieldOfStudyView',
         components: {
-            MainView
+            MainView,
+            ChangeLimits
         },
         props: ['fieldOfStudy', 'students', 'noSem', 'stDegree'],
         data() {
             return {
+                info: " ",
                 FieldOfStudyView: {
                     file: '',
                     fileStudents: '',
                     fileSubjects: '',
                     uploadStudents: false,
                     uploadSubjects: false,
-                    changeNoPlaces: false
+                    changeNoPlaces: false,
+                    subjectsJson: [],
+                    displaySubjectsTable: false
                 }
             }
         },
@@ -32,7 +37,7 @@
             submitFile() {
                 let formData = new FormData();
                 formData.append('file', this.FieldOfStudyView.file[0]);
-                axios.post('http://localhost:8090/api/students', formData,
+                axios.post('http://localhost:8098/api/students', formData,
                     {
                         headers: {
                             'Content-Type': 'multipart/form-data'
@@ -48,33 +53,40 @@
                         console.log(err.response);
                     });
             },
-
-            // uploadSubjects: function () {
-            // },
-
-            // changeNoPlaces: function () {
-            //     axios.post(`http://localhost:8090/api/admin/login`, this.adminData).then(response => {
-            //         console.log("AAAAAAAA" + response);
-            //         console.log(response);
-            //         this.confirmation = response;
-            //         EventBus.$emit('ADMIN_LOGGED', response);
-            //     }).catch(err => {
-            //         console.log(err.response);
-            //     });
-            // },
             startAlgorithm: function () {
-                console.log(`http://localhost:8090/api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/start`);
-                axios.post(`http://localhost:8090/api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/start`).then(response => {
+                console.log(`http://localhost:8098/api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/start`);
+                axios.post(`http://localhost:8098/api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/start`).then(response => {
                     console.log(response);
                     this.anotherData.confirmation = response;
                     EventBus.$emit('LOGIN_CONFIRMED', response);
                 }).catch(err => {
                     console.log(err.response);
                 });
+            },
+            generateResults: function () {
+                axios.get(`http://localhost:8098/api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/download`).then(response => {
+                    console.log(this.info);
+                    this.info = `http://localhost:8098/api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/download`;
+                    console.log(this.info);
+                }).catch(err => {
+                    console.log(err.response);
+                });
+            },
+            changeLimits: function () {
+                axios.get(`http://localhost:8098/api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/changeLimits`).then(response => {
+                    this.FieldOfStudyView.subjectsJson = response.data;
+                    this.FieldOfStudyView.displaySubjectsTable = true;
+                    // this.MainView.visibleFOSView = false;
+                    // this.MainView.visibleLimitsView = true;
+                    console.log(this.FieldOfStudyView.subjectsJson);
+                    console.log(this.FieldOfStudyView.displaySubjectsTable);
+                    // EventBus.$emit('CHANGE_LIMITS');
+
+                }).catch(err => {
+                    console.log(err.response);
+                });
             }
         },
-
-        updated: {}
     };
 </script>
 

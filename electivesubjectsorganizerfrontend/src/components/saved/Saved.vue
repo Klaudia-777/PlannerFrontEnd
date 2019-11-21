@@ -20,7 +20,7 @@
         },
         mounted() {
             this.albumNum = State.albumNumber;
-            axios.get(`http://localhost:8090/api/students/${State.albumNumber}/choices`).then(response => {
+            axios.get(`http://localhost:8098/api/students/${State.albumNumber}/choices`).then(response => {
                 this.dataToCompute = response.data;
                 console.log(response.data);
                 console.log(this.savedSubjects);

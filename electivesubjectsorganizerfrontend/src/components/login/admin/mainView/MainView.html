@@ -1,24 +1,57 @@
 <div class="main-view" xmlns:v-on="http://www.w3.org/1999/xhtml">
     <h1>Uruchom zapisy na dany kierunek:</h1>
+    <div id="upload">
+        <p>
+            <button style="width: 150px; height: 50px;margin:5px; background: azure; color: darkblue"
+                    v-on:click="fileUpload()">Załaduj pliki
+            </button>
+        </p>
+    </div>
+    <div id="" wrapper>
+        <i v-for="item in fieldsOfStudy">
 
+            <div :id=item.toString()>
 
-    <i v-for="item in fieldsOfStudy">
-        <button style="width: 110px; height: 50px;margin:5px; background: azure; color: darkblue"
-                v-on:click="studentList(item.toString())">{{item.toString()}}
-        </button>
-    </i>
-    <p>
-        <button style="width: 110px; height: 50px;margin:5px; background: azure; color: darkblue"
-                v-on:click="fileUpload()">Upload Files
-        </button>
-    </p>
+                <button style="width: 150px; height: 50px;margin:5px; background: azure; color: darkblue"
+                        v-on:click="clicked(item.toString())">{{item.toString()}}
+                </button>
 
-    <div v-if="this.buttonTextValue==='Upload Files'">
+                <div v-if="buttonTextValue===item.toString()">
+                    <p><span>Stopień studiów:</span></p>
+                    <!--<label>-->
+                    <select v-model="studiesDegree" placeholder="stopień studiów">
+                        <option>pierwszego_stopnia</option>
+                        <option>drugiego_stopnia</option>
+                        required
+                    </select>
+                    <!--</label>-->
+                    <p><span>Numer semestru:</span></p>
+                    <p><select v-model="noSemester" placeholder="number of semester">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        required
+                    </select>
+                    <p>
+                        <button style="width: 150px; height: 50px;margin:5px; background: azure; color: darkblue"
+                                v-on:click="studentList()">Wybierz
+                        </button>
+                    </p>
+                </div>
+            </div>
+        </i>
+    </div>
+
+    <div v-if="this.buttonTextValue==='Załaduj pliki'">
         <FileUpload/>
     </div>
 
-    <div v-if="this.buttonTextValue!=='' && this.buttonTextValue!=='Upload Files'">
-        <FieldOfStudyView v-bind:fieldOfStudy=this.buttonTextValue v-bind:students=this.students
+    <div id="fieldOfStudyView" v-if="this.buttonTextValue==='Wybierz'">
+        <FieldOfStudyView v-bind:fieldOfStudy=this.fieldOfStudy v-bind:students=this.students
                           v-bind:noSem=this.noSemester v-bind:stDegree=this.studiesDegree></FieldOfStudyView>
 
     </div>

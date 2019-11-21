@@ -6,8 +6,8 @@
         <StudentPersonal v-if="isLogged && !isConfirmed && !isAdminLogged"
                          v-bind:user-data="userData"></StudentPersonal>
         <PrioritizeSubjects v-if="isConfirmed && !isSaved"></PrioritizeSubjects>
-        <MainView v-if="isAdminLogged"></MainView>
-        <!--<FieldOfStudyView v-if="fieldOfStudyChosen"></FieldOfStudyView>-->
+        <MainView v-if="isAdminLogged && !changeLimits"></MainView>
+        <!--<ChangeLimits v-if="changeLimits"></ChangeLimits>-->
     </div>
 </template>
 
@@ -22,6 +22,7 @@
     import PrioritizeSubjects from "./components/prioritizeSubjects/PrioritizeSubjects";
     import MainView from "./components/login/admin/mainView/MainView";
     import FieldOfStudyView from "./components/login/admin/FieldOfStudyViewAdmin/FieldOfStudyView";
+    import ChangeLimits from "./components/login/admin/changeLimits/ChangeLimits";
 
     export default {
         name: 'app',
@@ -33,10 +34,15 @@
                 isSaved: false,
                 isAdminLogged: false,
                 uploadStudents: false,
-                fieldOfStudyChosen: false
+                fieldOfStudyChosen: false,
+                changeLimits: false,
+                subjectsJson: [],
+                fieldOfStudy: ''
+
             }
         },
         components: {
+            ChangeLimits,
             StudentPersonal,
             // StudentLogin,
             // AdminLogin,
@@ -63,13 +69,17 @@
             EventBus.$on('STUDENTS_UPLOADED', (isUploaded) => {
                 this.uploadStudents = isUploaded;
             });
-            EventBus.$on('FIELD_OF_STUDY_CHOSEN',() => {
+            EventBus.$on('FIELD_OF_STUDY_CHOSEN', () => {
                 this.fieldOfStudyChosen = true;
+            });
+            EventBus.$on('CHANGE_LIMITS', () => {
+                this.changeLimits = true;
             });
         }
     }
 
 </script>
+
 
 <style>
     #app {
@@ -77,11 +87,19 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
-        color: #2c3e50;
+        color: black;
         margin-top: 60px;
     }
 
     body {
-        background: lightblue;
+        background: darkgrey;
+
+        /*"Akademia Górniczo-Hutnicza im. Stanisława Staszica w Krakowie";*/
+        background-image: url("Znak_graficzny_AGH.svg.png");
+        background-repeat: no-repeat;
+        background-position: left top;
+        background-attachment: fixed;
+        background-size: auto;
+
     }
 </style>

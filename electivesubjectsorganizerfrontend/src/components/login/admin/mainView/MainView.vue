@@ -18,67 +18,72 @@
         data() {
             return {
                 fieldsOfStudy: [],
+                fieldOfStudy: '',
                 buttonTextValue: '',
                 students: [],
-                noSemester:'',
-                studiesDegree:'',
+                noSemester: '',
+                studiesDegree: '',
                 cleanStudents: false
             }
         },
         mounted() {
-                axios.get('http://localhost:8090/api/fieldsOfStudy').then(response => {
-                    this.fieldsOfStudy = response.data;
-                    console.log(response.data);
-                })
-                    .catch(err => {
-                        console.log('FAILURE!!');
-                        console.log(err.response);
-                    });
+            axios.get('http://localhost:8098/api/fieldsOfStudy').then(response => {
+                this.fieldsOfStudy = response.data;
+                console.log(response.data);
+            })
+                .catch(err => {
+                    console.log('FAILURE!!');
+                    console.log(err.response);
+                });
+        },
+        methods: {
+            submit: function () {
             },
-        methods:{
-            // getButtonText : function(buttonText){
-            //     EventBus.$emit('FIELD_OF_STUDY_CHOSEN');
-            //     this.buttonTextValue=buttonText;
-            //     console.log(this.buttonTextValue);
-            //     return buttonText;
-            // }
-            studentList: function(buttonText) {
-                axios.get(`http://localhost:8090/api/admin/fieldOfStudyView/${buttonText}`).then(response => {
-                    if(this.cleanStudents){
-                        this.students=[];
-                        this.cleanStudents=false;
+
+            clicked: function (FOS) {
+                this.buttonTextValue = FOS;
+                this.fieldOfStudy = FOS;
+            },
+
+            setNoSemAndStDegree: function (noSem, stDeg) {
+                this.studiesDegree = noSem;
+                this.noSemester = stDeg;
+            },
+
+            studentList: function () {
+                this.buttonTextValue = "Wybierz";
+                axios.get(`http://localhost:8098/api/admin/fieldOfStudyView/${this.fieldOfStudy}/${this.studiesDegree}/${this.noSemester}`).then(response => {
+                    if (this.cleanStudents) {
+                        this.students = [];
+                        this.cleanStudents = false;
                     }
-                    // EventBus.$emit('STUDENTS_PRINTED', response);
                     this.buttonTextValue = buttonText;
                     this.students = response.data;
-                    this.studiesDegree=this.students[1].studiesDegree;
-                    this.noSemester=this.students[1].numberOfSemester;
-                    this.cleanStudents=true;
+
+                    this.cleanStudents = true;
                 }).catch(err => {
                     console.log(err.response);
                 })
             },
-            fileUpload: function(){
-                this.buttonTextValue = 'Upload Files';
+            fileUpload: function () {
+                this.buttonTextValue = 'Załaduj pliki';
             }
 
         },
-        computed: {
+        computed: {}
+        // uploadSubjects: function () {
+        // },
 
-        }
-            // uploadSubjects: function () {
-            // },
-
-            // changeNoPlaces: function () {
-            //     axios.post(`http://localhost:8090/api/admin/login`, this.adminData).then(response => {
-            //         console.log("AAAAAAAA" + response);
-            //         console.log(response);
-            //         this.confirmation = response;
-            //         EventBus.$emit('ADMIN_LOGGED', response);
-            //     }).catch(err => {
-            //         console.log(err.response);
-            //     });
-            // },
+        // changeNoPlaces: function () {
+        //     axios.post(`http://localhost:8098/api/admin/login`, this.adminData).then(response => {
+        //         console.log("AAAAAAAA" + response);
+        //         console.log(response);
+        //         this.confirmation = response;
+        //         EventBus.$emit('ADMIN_LOGGED', response);
+        //     }).catch(err => {
+        //         console.log(err.response);
+        //     });
+        // },
 
     };
 </script>

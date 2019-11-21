@@ -1,10 +1,11 @@
 <div class="prioritize-subjects" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
-    <!--<div v-if="this.hide===false">-->
-    <h1>Przedmioty obieralne:</h1>
-    <p>
-        <!--<button v-on:click="print()">Pokaż przedmioty</button>-->
-        <button v-on:click="getChoicesStatus()">Pokaż zapisane</button>
-    </p>
+    <div v-if="hide===false">
+        <h1>Przedmioty obieralne:</h1>
+        <p>
+            <!--<button v-on:click="print()">Pokaż przedmioty</button>-->
+            <button v-on:click="getChoicesStatus()">Pokaż zapisane</button>
+        </p>
+    </div>
     <div v-if="buttonTextValue==='Pokaż przedmioty'">
         <p>Uporządkuj przedmioty według preferencji.</p>
         <p>1 - najbardziej pożądany przedmiot</p>
@@ -39,7 +40,7 @@
         </p>
     </div>
 
-    <Saved v-if="buttonTextValue==='Pokaż zapisane'" v-bind:savedSubjects="this.subjects"
+    <Saved  v-if="buttonTextValue==='Pokaż zapisane'" v-bind:savedSubjects="this.subjects"
            v-bind:albumNum="this.subjects"></Saved>
 
 </div>

@@ -1,38 +1,56 @@
-<div class="field-of-study-view" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<div class="field-of-study-view" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:margin="http://www.w3.org/1999/xhtml"
+     xmlns:v-bind="http://www.w3.org/1999/xhtml">
+    <div>
     <h1>{{fieldOfStudy}}</h1>
 
-    <button v-on:click="startAlgorithm()">Przeprowadź zapisy</button>
+    <button style="width: 150px; height: 50px;margin:5px; background: azure; color: darkblue"
+            v-on:click="startAlgorithm()">Przeprowadź zapisy
+    </button>
+    <button style="width: 150px; height: 50px;margin:5px; background: azure; color: darkblue"
+            v-on:click="generateResults()"><a v-bind:href="info"> Pobierz plik z wyborami studentów</a>
+    </button>
+    <button style="width: 150px; height: 50px;margin:5px; background: azure; color: darkblue"
+            v-on:click="changeLimits()">Zmień liczbę miejsc
+    </button>
+    </div>
+    <div id="changeLimits" v-if="this.FieldOfStudyView.displaySubjectsTable===true">
+        <ChangeLimits v-bind:subjectsJson=this.FieldOfStudyView.subjectsJson
+                      v-bind:fieldOfStudy=fieldOfStudy></ChangeLimits>
+    </div>
 
+    <!--<p>-->
+    <!--<a v-bind:href="info"> Kliknij aby pobrać </a>-->
+    <!--</p>-->
     <!--<label>Lista studentów:</label>-->
-        <!--<table id="studentTable">-->
-            <!--<thead>-->
-            <!--<tr>-->
-                <!--<th>Numer_albumu</th>-->
-                <!--<th>Priorytet</th>-->
-                <!--<th>Kierunek</th>-->
-                <!--<th>Stopień</th>-->
-                <!--<th>Semestr</th>-->
-                <!--<th>Średnia_ocen</th>-->
-                <!--<th>Imię</th>-->
-                <!--<th>Nazwisko</th>-->
-                <!--<th>Specjalność</th>-->
-            <!--</tr>-->
-            <!--</thead>-->
-            <!--<tbody>-->
-            <!--<tr v-for="row in students">-->
-                <!--<td>{{row.albumNumber}}</td>-->
-                <!--<td>{{row.studentsRole}}</td>-->
-                <!--<td>{{row.fieldOfStudy}}</td>-->
-                <!--<td>{{row.studiesDegree}}</td>-->
-                <!--<td>{{row.numberOfSemester}}</td>-->
-                <!--<td>{{row.averageGrade}}</td>-->
-                <!--<td>{{row.name}}</td>-->
-                <!--<td>{{row.surname}}</td>-->
-                <!--<td>{{row.speciality}}</td>-->
+    <!--<table id="studentTable">-->
+    <!--<thead>-->
+    <!--<tr>-->
+    <!--<th>Numer_albumu</th>-->
+    <!--<th>Priorytet</th>-->
+    <!--<th>Kierunek</th>-->
+    <!--<th>Stopień</th>-->
+    <!--<th>Semestr</th>-->
+    <!--<th>Średnia_ocen</th>-->
+    <!--<th>Imię</th>-->
+    <!--<th>Nazwisko</th>-->
+    <!--<th>Specjalność</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+    <!--<tr v-for="row in students">-->
+    <!--<td>{{row.albumNumber}}</td>-->
+    <!--<td>{{row.studentsRole}}</td>-->
+    <!--<td>{{row.fieldOfStudy}}</td>-->
+    <!--<td>{{row.studiesDegree}}</td>-->
+    <!--<td>{{row.numberOfSemester}}</td>-->
+    <!--<td>{{row.averageGrade}}</td>-->
+    <!--<td>{{row.name}}</td>-->
+    <!--<td>{{row.surname}}</td>-->
+    <!--<td>{{row.speciality}}</td>-->
 
-            <!--</tr>-->
-            <!--</tbody>-->
-        <!--</table>-->
+    <!--</tr>-->
+    <!--</tbody>-->
+    <!--</table>-->
 
 </div>
 

@@ -1,8 +1,21 @@
-.saved{
-    padding: 0;
+.saved {
+    padding: 100px;
     position: absolute;
     top: 400%;
     left: 50%;
     margin: 0 -50% -50% 0;
     transform: translate(-50%, -50%)
+}
+table
+{
+    height: 70%;
+}
+#Header {
+    width: 960px;
+    height: 150px;
+}
+
+#Content {
+    height: 100%;
+    width: 960px;
 }
