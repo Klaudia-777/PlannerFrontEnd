@@ -24,7 +24,7 @@
                     console.log("AAAAAAAA" + response);
                     console.log(response);
                     this.confirmation = response;
-                    EventBus.$emit('ADMIN_LOGGED', response);
+                    EventBus.$emit('ADMIN_LOGGED', response.data);
                 }).catch(err => {
                     console.log(err.response);
                 });

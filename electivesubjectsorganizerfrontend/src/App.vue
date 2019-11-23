@@ -6,7 +6,7 @@
         <StudentPersonal v-if="isLogged && !isConfirmed && !isAdminLogged"
                          v-bind:user-data="userData"></StudentPersonal>
         <PrioritizeSubjects v-if="isConfirmed && !isSaved"></PrioritizeSubjects>
-        <MainView v-if="isAdminLogged && !changeLimits"></MainView>
+        <MainView v-if="isAdminLogged"></MainView>
         <!--<ChangeLimits v-if="changeLimits"></ChangeLimits>-->
     </div>
 </template>
@@ -35,7 +35,6 @@
                 isAdminLogged: false,
                 uploadStudents: false,
                 fieldOfStudyChosen: false,
-                changeLimits: false,
                 subjectsJson: [],
                 fieldOfStudy: ''
 
@@ -61,7 +60,11 @@
             });
             EventBus.$on('ADMIN_LOGGED', (isLogged) => {
                 console.log("AAPPPPPPPP" + isLogged);
+                console.log(isLogged);
+                console.log(this.isAdminLogged);
                 this.isAdminLogged = isLogged;
+                console.log(this.isAdminLogged);
+
             });
             EventBus.$on('CHOICE_SAVED', () => {
                 this.isSaved = true;
@@ -71,9 +74,6 @@
             });
             EventBus.$on('FIELD_OF_STUDY_CHOSEN', () => {
                 this.fieldOfStudyChosen = true;
-            });
-            EventBus.$on('CHANGE_LIMITS', () => {
-                this.changeLimits = true;
             });
         }
     }
