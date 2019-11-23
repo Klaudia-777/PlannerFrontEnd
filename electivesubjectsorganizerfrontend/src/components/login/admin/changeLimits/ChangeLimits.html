@@ -1,12 +1,12 @@
 <div class="change-limits" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:margin="http://www.w3.org/1999/xhtml"
      xmlns:v-bind="http://www.w3.org/1999/xhtml">
-    <p>Zmień limity miejsc dla kierunku: {{fieldOfStudy}}</p>
+    <p style="font-size: large">Zmień limity miejsc dla kierunku: {{fieldOfStudy}}</p>
     <table id="subjectLimitsTable">
         <thead>
         <tr>
             <th>Nazwa</th>
             <th>Prowadzący</th>
-            <!--<th>Liczba miejsc</th>-->
+            <th>Liczba miejsc</th>
         </tr>
         </thead>
         <tbody>
@@ -14,7 +14,7 @@
             <td>{{row.name}}</td>
             <td>{{row.tutor}}</td>
             <td>
-                <input v-model="item" :placeholder="row.numberOfPlaces" @change="changeLimit(item,row.id)" required/>
+                <input v-model="row.numberOfPlaces" :placeholder="row.numberOfPlaces" />
             </td>
         </tr>
         </tbody>

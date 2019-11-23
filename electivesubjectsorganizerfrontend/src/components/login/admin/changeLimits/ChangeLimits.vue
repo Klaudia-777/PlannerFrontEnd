@@ -2,6 +2,7 @@
 <style src="./ChangeLimits.css"></style>
 <script>
     import FieldOfStudyView from "../FieldOfStudyViewAdmin/FieldOfStudyView";
+    import axios from 'axios';
 
     export default {
 
@@ -9,20 +10,34 @@
         components: {
             FieldOfStudyView
         },
-        props: ['subjectsJson', 'fieldOfStudy'],
+        props: ['subjectsJson', 'fieldOfStudy', 'noSem', 'stDegree'],
         data() {
             return {
-                info: " ",
                 ChangeLimits: {}
             }
         },
         methods: {
             changeLimit: function (limit, subjectId) {
-                let index = subjectsJson.findIndex(x => (x.subjectId === subjectId));
-                subjectsJson[index].limit = limit;
+                let index = this.subjectsJson.findIndex(x => (x.id === subjectId));
+                this.subjectsJson[index].numberOfPlaces = limit;
             },
             saveOnDB: function () {
-                console.log(this.subjectsJson)
+                console.log(this.subjectsJson);
+                let subjectsMap=[];
+                for (let i = 0; i < this.subjectsJson.length; i++) {
+                    subjectsMap.push({
+                        subjectId: this.subjectsJson[i].id,
+                        limit: this.subjectsJson[i].numberOfPlaces
+                    })
+                }
+
+                axios.post(`http://localhost:8098/api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/save-new-limits`,
+                    subjectsMap).then(() => {
+                    console.log("UPDATED ON DB");
+                })
+                    .catch(() => {
+                        console.log('FAILURE!!');
+                    });
                 alert("Zapisano.")
             }
         }

@@ -39,10 +39,10 @@
             <button v-on:click="checkEnteredPriorities()">Zapisz</button>
         </p>
     </div>
-
-    <Saved  v-if="buttonTextValue==='Pokaż zapisane'" v-bind:savedSubjects="this.subjects"
-           v-bind:albumNum="this.subjects"></Saved>
-
+    <div id="saved">
+        <Saved v-if="buttonTextValue==='Pokaż zapisane'" v-bind:savedSubjects="this.subjects"
+               v-bind:albumNum="this.subjects"></Saved>
+    </div>
 </div>
 
 

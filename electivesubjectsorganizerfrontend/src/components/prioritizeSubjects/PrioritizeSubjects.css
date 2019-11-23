@@ -6,3 +6,8 @@
     margin: 0 -50% -50% 0;
     transform: translate(-50%, -50%)
 }
+div#saved {
+    position: absolute;
+    left: 50%;
+    margin-top: 10rem;
+}

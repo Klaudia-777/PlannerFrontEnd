@@ -1,21 +1,23 @@
 <div class="field-of-study-view" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:margin="http://www.w3.org/1999/xhtml"
      xmlns:v-bind="http://www.w3.org/1999/xhtml">
     <div>
-    <h1>{{fieldOfStudy}}</h1>
+        <h1>{{fieldOfStudy}}</h1>
 
-    <button style="width: 150px; height: 50px;margin:5px; background: azure; color: darkblue"
-            v-on:click="startAlgorithm()">Przeprowadź zapisy
-    </button>
-    <button style="width: 150px; height: 50px;margin:5px; background: azure; color: darkblue"
-            v-on:click="generateResults()"><a v-bind:href="info"> Pobierz plik z wyborami studentów</a>
-    </button>
-    <button style="width: 150px; height: 50px;margin:5px; background: azure; color: darkblue"
-            v-on:click="changeLimits()">Zmień liczbę miejsc
-    </button>
+        <button style="width: 150px; height: 50px;margin:5px; background: azure; color: darkblue"
+                v-on:click="startAlgorithm()">Przeprowadź zapisy
+        </button>
+        <button style="width: 150px; height: 50px;margin:5px; background: azure; color: darkblue"
+                v-on:click="generateResults()"><a v-bind:href="info"> Pobierz plik z wyborami studentów</a>
+        </button>
+        <button style="width: 150px; height: 50px;margin:5px; background: azure; color: darkblue"
+                v-on:click="changeLimits()">Zmień liczbę miejsc
+        </button>
     </div>
     <div id="changeLimits" v-if="this.FieldOfStudyView.displaySubjectsTable===true">
         <ChangeLimits v-bind:subjectsJson=this.FieldOfStudyView.subjectsJson
-                      v-bind:fieldOfStudy=fieldOfStudy></ChangeLimits>
+                      v-bind:fieldOfStudy=fieldOfStudy
+                      v-bind:noSem=noSem
+                      v-bind:stDegree=stDegree></ChangeLimits>
     </div>
 
     <!--<p>-->
