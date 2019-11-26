@@ -5,6 +5,7 @@
     import axios from 'axios';
     import MainView from "../mainView/MainView";
     import ChangeLimits from "../changeLimits/ChangeLimits";
+    import {url} from "../../../../constants";
 
     export default {
 
@@ -37,7 +38,7 @@
             submitFile() {
                 let formData = new FormData();
                 formData.append('file', this.FieldOfStudyView.file[0]);
-                axios.post('http://localhost:8098/api/students', formData,
+                axios.post(`${url}api/students`, formData,
                     {
                         headers: {
                             'Content-Type': 'multipart/form-data'
@@ -54,8 +55,8 @@
                     });
             },
             startAlgorithm: function () {
-                console.log(`http://localhost:8098/api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/start`);
-                axios.post(`http://localhost:8098/api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/start`).then(response => {
+                console.log(`${url}api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/start`);
+                axios.post(`${url}api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/start`).then(response => {
                     console.log(response);
                     this.anotherData.confirmation = response;
                     EventBus.$emit('LOGIN_CONFIRMED', response);
@@ -64,16 +65,16 @@
                 });
             },
             generateResults: function () {
-                axios.get(`http://localhost:8098/api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/download`).then(response => {
+                axios.get(`${url}api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/download`).then(response => {
                     console.log(this.info);
-                    this.info = `http://localhost:8098/api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/download`;
+                    this.info = `${url}api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/download`;
                     console.log(this.info);
                 }).catch(err => {
                     console.log(err.response);
                 });
             },
             changeLimits: function () {
-                axios.get(`http://localhost:8098/api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/changeLimits`).then(response => {
+                axios.get(`${url}api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/changeLimits`).then(response => {
                     this.FieldOfStudyView.subjectsJson = response.data;
                     this.FieldOfStudyView.displaySubjectsTable = true;
                     // this.MainView.visibleFOSView = false;

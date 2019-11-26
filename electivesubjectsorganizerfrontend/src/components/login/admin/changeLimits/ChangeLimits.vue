@@ -3,6 +3,7 @@
 <script>
     import FieldOfStudyView from "../FieldOfStudyViewAdmin/FieldOfStudyView";
     import axios from 'axios';
+    import {url} from "../../../../constants";
 
     export default {
 
@@ -31,7 +32,7 @@
                     })
                 }
 
-                axios.post(`http://localhost:8098/api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/save-new-limits`,
+                axios.post(`${url}api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/save-new-limits`,
                     subjectsMap).then(() => {
                     console.log("UPDATED ON DB");
                 })

@@ -5,6 +5,7 @@
     import PrioritizeSubjects from "../prioritizeSubjects/PrioritizeSubjects";
     import {State} from "../../albumNumber";
     import axios from 'axios';
+    import {url} from "../../constants";
 
     export default {
         name: 'Saved',
@@ -20,7 +21,7 @@
         },
         mounted() {
             this.albumNum = State.albumNumber;
-            axios.get(`http://localhost:8098/api/students/${State.albumNumber}/choices`).then(response => {
+            axios.get(`${url}api/students/${State.albumNumber}/choices`).then(response => {
                 this.dataToCompute = response.data;
                 console.log(response.data);
                 console.log(this.savedSubjects);

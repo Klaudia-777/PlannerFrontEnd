@@ -3,6 +3,7 @@
 <script>
     import EventBus from '../../../eventBus'
     import axios from 'axios';
+    import {url} from "../../../constants";
 
     export default {
 
@@ -20,10 +21,13 @@
 
         methods: {
             confirm: function () {
-                axios.post(`http://localhost:8098/api/admin/login`, this.adminData).then(response => {
+                axios.post(`${url}api/admin/login`, this.adminData).then(response => {
                     console.log("AAAAAAAA" + response);
                     console.log(response);
-                    this.confirmation = response;
+                    this.confirmation = response.data;
+                    if(this.confirmation===false){
+                        alert("Błędny login lub hasło.")
+                    }
                     EventBus.$emit('ADMIN_LOGGED', response.data);
                 }).catch(err => {
                     console.log(err.response);

@@ -6,6 +6,7 @@
     import axios from 'axios';
     import {State} from "../../albumNumber";
     import Saved from "../saved/Saved";
+    import {url} from "../../constants";
 
     export default {
         name: 'PrioritizeSubjects',
@@ -30,7 +31,7 @@
         },
         methods: {
             getChoicesStatus: function () {
-                axios.get(`http://localhost:8098/api/students/${State.albumNumber}/areChoicesSaved`).then(response => {
+                axios.get(`${url}api/students/${State.albumNumber}/areChoicesSaved`).then(response => {
                     this.areChoicesSaved = response.data;
                     console.log(response.data);
                     this.buttonTextValue = 'Pokaż zapisane';
@@ -68,7 +69,7 @@
                 } else {
                     alert("Priorytety zostały ustawione poprawnie :)");
 
-                    axios.post(`http://localhost:8098/api/students/${this.albumNr}/saveChoices`, this.priorities).then(response => {
+                    axios.post(`${url}api/students/${this.albumNr}/saveChoices`, this.priorities).then(response => {
                         console.log(this.priorities);
                         console.log(response);
                         this.isSaved = true;
@@ -82,7 +83,7 @@
             }
         },
         mounted() {
-            axios.get(`http://localhost:8098/api/subjectPool/${State.albumNumber}`).then(response => {
+            axios.get(`${url}api/subjectPool/${State.albumNumber}`).then(response => {
                 this.allPriorities = [];
                 this.priorities = [];
                 this.subjects = response.data;

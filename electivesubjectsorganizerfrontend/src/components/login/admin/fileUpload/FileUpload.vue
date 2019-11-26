@@ -4,6 +4,7 @@
     import EventBus from '../../../../eventBus'
     import axios from 'axios';
     import MainView from "../mainView/MainView";
+    import {url} from "../../../../constants";
 
     export default {
 
@@ -27,7 +28,7 @@
             submitStudentsFile() {
                 let formData = new FormData();
                 formData.append('file', this.FileUpload.file[0]);
-                axios.post('http://localhost:8098/api/students', formData,
+                axios.post(`${url}api/students`, formData,
                     {
                         headers: {
                             'Content-Type': 'multipart/form-data'
@@ -45,7 +46,7 @@
             submitSubjectsFile() {
                 let formData = new FormData();
                 formData.append('file', this.FileUpload.file[0]);
-                axios.post('http://localhost:8098/api/subjects', formData,
+                axios.post(`${url}api/subjects`, formData,
                     {
                         headers: {
                             'Content-Type': 'multipart/form-data'

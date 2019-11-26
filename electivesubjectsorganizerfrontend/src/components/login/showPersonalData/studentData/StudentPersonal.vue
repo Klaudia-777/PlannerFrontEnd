@@ -5,6 +5,7 @@
     import EventBus from '../../../../eventBus'
     import axios from 'axios';
     import {State} from "../../../../albumNumber";
+    import {url} from "../../../../constants";
 
     export default {
         props: {
@@ -33,7 +34,7 @@
 
         methods: {
             confirm: function () {
-                axios.post(`http://localhost:8098/api/students/login`, this.studentData).then(response => {
+                axios.post(`${url}api/students/login`, this.studentData).then(response => {
                     console.log(response);
                     this.anotherData.confirmation = response;
                     EventBus.$emit('LOGIN_CONFIRMED',response);

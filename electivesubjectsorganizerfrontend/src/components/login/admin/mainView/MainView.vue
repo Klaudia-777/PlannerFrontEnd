@@ -6,6 +6,7 @@
     import AdminLogin from "../AdminLogin";
     import FieldOfStudyView from "../FieldOfStudyViewAdmin/FieldOfStudyView";
     import FileUpload from "../fileUpload/FileUpload";
+    import {url} from "../../../../constants";
 
     export default {
 
@@ -27,7 +28,7 @@
             }
         },
         mounted() {
-            axios.get('http://localhost:8098/api/fieldsOfStudy').then(response => {
+            axios.get(`${url}api/fieldsOfStudy`).then(response => {
                 this.fieldsOfStudy = response.data;
                 console.log(response.data);
             })
@@ -52,7 +53,7 @@
 
             studentList: function () {
                 this.buttonTextValue = "Wybierz";
-                axios.get(`http://localhost:8098/api/admin/fieldOfStudyView/${this.fieldOfStudy}/${this.studiesDegree}/${this.noSemester}`).then(response => {
+                axios.get(`${url}api/admin/fieldOfStudyView/${this.fieldOfStudy}/${this.studiesDegree}/${this.noSemester}`).then(response => {
                     if (this.cleanStudents) {
                         this.students = [];
                         this.cleanStudents = false;
@@ -75,7 +76,7 @@
         // },
 
         // changeNoPlaces: function () {
-        //     axios.post(`http://localhost:8098/api/admin/login`, this.adminData).then(response => {
+        //     axios.post(`${url}api/admin/login`, this.adminData).then(response => {
         //         console.log("AAAAAAAA" + response);
         //         console.log(response);
         //         this.confirmation = response;
