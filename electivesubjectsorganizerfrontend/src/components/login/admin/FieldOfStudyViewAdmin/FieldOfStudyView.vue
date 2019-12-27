@@ -26,7 +26,8 @@
                     uploadSubjects: false,
                     changeNoPlaces: false,
                     subjectsJson: [],
-                    displaySubjectsTable: false
+                    displaySubjectsTable: false,
+                    date: ''
                 }
             }
         },
@@ -54,6 +55,18 @@
                         console.log(err.response);
                     });
             },
+            setDate: function (data) {
+                if (data !== undefined) {
+                    console.log(data);
+                    axios.post(`${url}api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/date`, data).then(response => {
+                        this.FieldOfStudyView.date=data;
+                        console.log(response);
+                    }).catch(err => {
+                        console.log(err.response);
+                    });
+                    alert("Pomyślnie ustawiono termin zakończenia zapisów.")
+                }
+            },
             startAlgorithm: function () {
                 console.log(`${url}api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/start`);
                 axios.post(`${url}api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/start`).then(response => {
@@ -69,6 +82,7 @@
                     console.log(this.info);
                     this.info = `${url}api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/download`;
                     console.log(this.info);
+                    alert("Wygenerowano plik.")
                 }).catch(err => {
                     console.log(err.response);
                 });
@@ -88,6 +102,14 @@
                 });
             }
         },
+        mounted() {
+            axios.get(`${url}api/admin/${this.fieldOfStudy}/${this.noSem}/${this.stDegree}/getDate`).then(response => {
+                this.FieldOfStudyView.date = new Date(response.data).toLocaleDateString();
+                console.log(this.FieldOfStudyView.date)
+            }).catch(err => {
+                console.log(err.response);
+            });
+        }
     };
 </script>
 

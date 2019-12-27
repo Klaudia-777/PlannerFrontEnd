@@ -3,6 +3,14 @@
     <div>
         <h1>{{fieldOfStudy}}</h1>
 
+        <div>
+            <label for="end">Ustawiony termin: {{this.FieldOfStudyView.date}}. Zmień termin zakończenia zapisów:</label>
+            <p><input v-model="data" type="date" id="end" name="zapisy-end"
+                      min="2020-01-01" max="2021-12-31">
+            </p>
+            <button  v-on:click="setDate(data)">Ustaw</button>
+        </div>
+
         <button style="width: 150px; height: 50px;margin:5px; background: azure; color: darkblue"
                 v-on:click="startAlgorithm()">Przeprowadź zapisy
         </button>
