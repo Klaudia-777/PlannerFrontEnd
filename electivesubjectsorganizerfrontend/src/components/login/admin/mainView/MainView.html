@@ -11,7 +11,6 @@
         <i v-for="item in fieldsOfStudy">
 
             <div :id=item.toString()>
-
                 <button style="width: 150px; height: 50px;margin:5px; background: azure; color: darkblue"
                         v-on:click="clicked(item.toString())">{{item.toString()}}
                 </button>
